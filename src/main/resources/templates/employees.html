@@ -1,0 +1,150 @@
+<!--
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Employees</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#connectButton").click(function() {
+                $.ajax({
+                    url: "/connect",
+                    method: "POST",
+                    success: function() {
+                        $("#loadButton").show();
+                        $("#connectButton").hide();
+                    },
+                    error: function(error) {
+                        console.log("Error connecting to DB: ", error);
+                    }
+                });
+            });
+
+            $("#loadButton").click(function() {
+                $.ajax({
+                    url: "/employees/rows",
+                    method: "GET",
+                    success: function(data) {
+                        const tbody = $("#employeeTable tbody");
+                        tbody.empty();  // Clear previous data
+                        data.forEach(function(employee) {
+                            tbody.append(
+                                "<tr>" +
+                                "<td>" + employee.id + "</td>" +
+                                "<td>" + employee.name + "</td>" +
+                                "<td>" + employee.email + "</td>" +
+                                "</tr>"
+                            );
+                        });
+                        $("#employeeTable").show();
+                    },
+                    error: function(error) {
+                        console.log("Error fetching data: ", error);
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+<h1>Employees</h1>
+<button id="connectButton">Connect DB1</button>
+<button id="loadButton" style="display:none;">Load Employees</button>
+<table id="employeeTable" border="1" style="display:none;">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+</body>
+</html>
+-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Employees</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#connectButtonDB1").click(function() {
+                $.ajax({
+                    url: "/connect",
+                    method: "POST",
+                    data: { db: "db1" },
+                    success: function() {
+                        $("#loadButton").show();
+                        $("#connectButtonDB1").hide();
+                        $("#connectButtonDB2").hide();
+                    },
+                    error: function(error) {
+                        console.log("Error connecting to DB: ", error);
+                    }
+                });
+            });
+
+            $("#connectButtonDB2").click(function() {
+                $.ajax({
+                    url: "/connect",
+                    method: "POST",
+                    data: { db: "db2" },
+                    success: function() {
+                        $("#loadButton").show();
+                        $("#connectButtonDB1").hide();
+                        $("#connectButtonDB2").hide();
+                    },
+                    error: function(error) {
+                        console.log("Error connecting to DB: ", error);
+                    }
+                });
+            });
+
+            $("#loadButton").click(function() {
+                $.ajax({
+                    url: "/employees/table",
+                    method: "GET",
+                    success: function(data) {
+                        const tbody = $("#employeeTable tbody");
+                        tbody.empty();  // Clear previous data
+                        data.forEach(function(employee) {
+                            tbody.append(
+                                "<tr>" +
+                                "<td>" + employee.id + "</td>" +
+                                "<td>" + employee.name + "</td>" +
+                                "<td>" + employee.email + "</td>" +
+                                "</tr>"
+                            );
+                        });
+                        $("#employeeTable").show();
+                    },
+                    error: function(error) {
+                        console.log("Error fetching data: ", error);
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+<h1>Employees</h1>
+<button id="connectButtonDB1">Connect DB1</button>
+<button id="connectButtonDB2">Connect DB2</button>
+<button id="loadButton" style="display:none;">Load Employees</button>
+<table id="employeeTable" border="1" style="display:none;">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Data will be populated here by JavaScript -->
+    </tbody>
+</table>
+</body>
+</html>
