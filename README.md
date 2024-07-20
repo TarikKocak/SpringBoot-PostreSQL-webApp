@@ -1,2 +1,2 @@
-This Project is not completed yet and probably will never touched again.  
-There is a different repository (https://github.com/TarikKocak/MultiDB-WebApp-SpringBoot) that does the same job instead.
+This project is not yet completed and may never be finished.
+There is a different repository (https://github.com/TarikKocak/MultiDB-WebApp-SpringBoot) that accomplishes the same task.
